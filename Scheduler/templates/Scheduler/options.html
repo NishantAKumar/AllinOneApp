@@ -1,0 +1,10 @@
+{% extends 'Scheduler/base.html' %}
+
+{% block body %}
+<form method="POST">
+    <a href="{% url 'create'%}"><input type="button" value="Create"></a>
+    <a href="{% url 'read'%}"><input type="button" value="Read"></a>
+    <a href="{% url 'update'%}"><input type="button" value="Update"></a>
+    <a href="{% url 'delete'%}"><input type="button" value="Delete"></a>
+</form>
+{% endblock %}
