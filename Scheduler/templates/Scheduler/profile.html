@@ -1,0 +1,8 @@
+{% extends 'Scheduler/base.html'%}
+{% block body %}
+<table border="3" align="center">
+<tr><td>Username</td><td>{{user.username}}</td></tr>
+<tr><td>Email</td><td>{{user.email}}</td></tr>
+</table><br>
+<a href="{% url 'options' %}"><input type="button" value="Back"></a><br>
+{% endblock %}

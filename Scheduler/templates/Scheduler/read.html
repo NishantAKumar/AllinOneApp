@@ -3,11 +3,11 @@
 {% if events %}
 <h3><u>Scheduled Events</u></h3><br>
 {% for i in events %}
-<h4>{{i}}</h3>
+<h3>{{i}}</h3>
 <br>
 {% endfor %}
-<h4>These Are All The Events Scheduled</h4><br>
 {% else %}
+
 <h3>No Events Scheduled</h3><br>
 {% endif %}
 <a href="{% url 'options' %}"><input type="button" value="Back"></a>

@@ -3,10 +3,10 @@
 {% if events %}
 <h3><u>Scheduled Events</u></h3><br>
 {% for i in events %}
-<h4>{{i}}</h3>
+<h3>{{i}}</h3>
 <br>
 {% endfor %}
-<h4>These Are All The Events Scheduled</h4><br>
+
 <form method="POST">
     {% csrf_token %}
     <h4>Details Of The Event To Be Deleted</h4><br>
