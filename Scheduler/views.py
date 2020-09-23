@@ -90,7 +90,7 @@ def AccDelete(request):
         if check:
             s = User.objects.get(username=request.user)
             s.delete()
-            messages.info(request, 'Account Delete')
+            messages.info(request, 'Account Deleted')
             return redirect('login')
     
     else:
