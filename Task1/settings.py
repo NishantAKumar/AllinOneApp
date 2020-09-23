@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'Task1.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Task Scheduler',
+        'NAME': 'Practice',
         'USER': 'postgres',
         'PASSWORD': 'nishuak',
         'HOST': 'localhost'

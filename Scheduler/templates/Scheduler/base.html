@@ -6,9 +6,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 
-<body style="background-color: rgb(235, 242, 250);">
+<body style="align-items: center; text-align: center; background-color: black;"">
     <div style="text-align:center; align-content: center;">
-    <div style="color: rgb(84, 46, 113);"><h1><i><u>Task Scheduler</u></i></h1><br></div>
+    <div style="color: silver;"><h1><i><u>Task Scheduler And NewsFeed</u></i></h1><br></div>
     {% if user.is_authenticated %}
     {% block body %}
     {% endblock %}
@@ -16,6 +16,5 @@
     <a href="{% url 'register' %}"><input type="button" value="Register"></a><br><br>
     <a href="{% url 'login' %}"><input type="button" value="Login"></a>
     {% endif %}
-
 </body>
 </html>

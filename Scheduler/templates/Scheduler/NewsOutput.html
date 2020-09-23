@@ -1,0 +1,17 @@
+{% extends 'Scheduler/base.html' %}
+{% block body %}
+<div style=" margin-right: auto; margin-left: auto; width: 650px;">
+    <h3 style="color: dodgerblue;">{{option}}</h3>
+{% for news_title, news_author, news_des, news_image, published_at, news_article in data_pack %}
+
+<div class="card mb-3" style="width: 17cm;">
+    <img class="card-img-top" src="{{news_image}}" alt="Image">
+    <div class="card-body">
+      <h5 class="card-title">{{news_title}}</h5>
+      <p class="card-text">{{news_des | truncatechars:150}}</p>
+      <a href="{{news_article}}" target="_blank" class="btn btn-primary">Read Full Article</a>
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}

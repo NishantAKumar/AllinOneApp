@@ -1,14 +1,25 @@
 {% extends 'Scheduler/base.html' %}
 {% block body %}
-{% if events %}
-<h3><u>Scheduled Events</u></h3><br>
-{% for i in events %}
-<h3>{{i}}</h3>
+<h3 style="color: dodgerblue;"" ><u>Scheduled Events</u></h3><br>
+<table border="3" align="center" style="color: silver;">
+    {% for i in data %}
+    <tr> 
+        <td><b>{{ i }}</b></td><td><form action='updateTodo/{{i.id}}/' style="display: inline;" method="POST">{% csrf_token %}<input type="text" name="updation" placeholder="Enter Updated Text"> <input type="submit" value="Update"></form>
+        </td>
+        <td><form action='deleteTodo/{{i.id}}/' style="display: inline;" method="POST">{% csrf_token %}<input type="submit" value="Delete"></form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br><br>
+<form method="POST" action="create">
+    {% csrf_token %}
+    <input type="text" placeholder="Event Description" name="event_des"><br><br>
+    <input type="submit" value="Create An Event">
+</form>
 <br>
+<a href="{% url 'options' %}"><input type="button" value="Back"></a><br>
+{% for each in messages %}
+<p style="color: silver;">{{ each }} </p><br>
 {% endfor %}
-{% else %}
-
-<h3>No Events Scheduled</h3><br>
-{% endif %}
-<a href="{% url 'options' %}"><input type="button" value="Back"></a>
 {% endblock %}

@@ -33,3 +33,10 @@ class User(AbstractBaseUser):
 
     def has_module_perm(self, app_label):
         return True
+
+class TodoList(models.Model):
+    description                               = models.TextField()
+    user                                      = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.description

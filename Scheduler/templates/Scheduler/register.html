@@ -6,9 +6,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 
-<body style="background-color: rgb(235, 242, 250);">
+<body style="align-items: center; text-align: center; background-color: black;">
     <div style="text-align:center; align-content: center;">
-    <div style="color:rgb(84, 46, 113);"><h1><i><u>Task Scheduler</u></i></h1><br></div>
+    <div style="color: silver;"><h1><i><u>Task Scheduler</u></i></h1><br></div>
     <form method="POST">
         {% csrf_token %}
     <input type="text" name="email" placeholder="Email"><br><br>
@@ -18,7 +18,7 @@
     <input type="submit" value="Register">
     </form>
 {% for each in messages %}
-{{each}}
+<p style="color: silver;">{{each}}</p>
 {% endfor %}
 </div>
 </body>
