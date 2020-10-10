@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
+from rest_framework.response import Response
 from django.contrib import messages
 from django.contrib.auth.models import auth
 from .models import MyAccountManager, User, TodoList
 from Scheduler.NewsApi import NewsFinder
+from .serializers import TodoSerializer, UserSerializer
+from rest_framework.decorators import api_view
+from Scheduler.youtubeSearch import search
 
 def logout(request):
     auth.logout(request)
@@ -63,6 +67,7 @@ def read(request):
     all_to_dos = User.objects.get(username=request.user).todolist_set.all()
     return render(request, 'Scheduler/read.html', context={'data': all_to_dos})
 
+
 def update(request, updation_id):
     if request.method == 'POST' and (request.POST.get("updation")).replace(" ", "") != "":
         updation_item = TodoList.objects.get(id = updation_id)
@@ -103,3 +108,56 @@ def news(request):
         option = request.POST.get('option')
         news_pack = NewsFinder(option.upper())
         return render(request, 'Scheduler/NewsOutput.html', context={"data_pack" : news_pack, "option":option})
+
+#api related views
+@api_view(['GET'])
+def taskList(request):
+    tasks = User.objects.get(username=request.user).todolist_set.all()
+    serializer = TodoSerializer(tasks, many = True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def taskData(request):
+    if request.user.is_admin:
+        tasks = TodoList.objects.all()
+        serializer = TodoSerializer(tasks, many = True)
+        return Response(serializer.data)
+    else:
+        return HttpResponse("<H3>Unauthorized</H3>")
+
+@api_view(['GET'])
+def UserList(request):
+    if request.user.is_admin:
+        tasks = User.objects.all()
+        serializer = UserSerializer(tasks, many = True)
+        return Response(serializer.data)
+
+    else:
+        return HttpResponse("<H3>Unauthorized</H3>")
+
+@api_view(['POST'])
+def taskCreate(request):
+    serializer = TodoSerializer(data = request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+
+@api_view(['POST'])
+def taskUpdate(request, pk):
+    tasks = User.objects.get(username=request.user).todolist_set.get(id=pk)
+    serializer = TodoSerializer(instance = tasks, data = request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+
+@api_view(['DELETE'])
+def taskDelete(request, pk):
+    tasks = User.objects.get(username=request.user).todolist_set.get(id=pk)
+    tasks.delete()
+    return Response("Item has been deleted")
+
+def youtube(request):
+    if request.method == 'GET':
+        return render(request, 'Scheduler/youtube_search.html')
+    elif request.method == 'POST':
+        return render(request, 'Scheduler/youtube_search.html', {'videos':search(request.POST.get('query'))})
